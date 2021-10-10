@@ -1,12 +1,35 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics,status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import EntradaDuodigito
-from .serializers import EntradaDuoDigitoSerializer
+from .serializers import EntradaDuoDigitoSerializer, CriarEntradaDuodigitoSerializer
 
-# Aqui criaremos a view que se enviará os dados JSON para o nosso frontend
 
+# Aqui criaremos o GET, que irá buscar todas as solicitações já criadas para o frontend
 class EntradaDuodigitoView(generics.ListAPIView):
     queryset = EntradaDuodigito.objects.all()
     serializer_class = EntradaDuoDigitoSerializer
+
+# Aqui vamos implementar o POST, que receberá do frontend as informações para criar uma nova entrada.
+class CriarEntradaDuodigitoView(APIView):
+    serializer_class = CriarEntradaDuodigitoSerializer
+
+    def post(self, request, format=None):
+        
+        serializer = self.serializer_class(data=request.data)
+        
+        # Se a entrada é valida, podemos receber o número, criar um objeto do tipo entrada e guarda-lo no banco de dados
+
+        if serializer.is_valid():
+            numero = serializer.data.get('numero')
+            entrada = EntradaDuodigito(numero=numero)
+            entrada.save()
+            status_resposta = status.HTTP_200_OK
+
+        else:
+            status_resposta = status.HTTP_500_INTERNAL_SERVER_ERROR
+
+        return Response(EntradaDuoDigitoSerializer(entrada).data,status=status_resposta)

@@ -1,5 +1,13 @@
 import useFetch from './hooks/useFetch';
 
+const useRequest = (numero) => {
+  const result = useFetch('http://127.0.0.1:8000/api/request', {
+    "numero": numero
+  })
+  
+  return result.multiplo_duodigito
+}
+
 const App = () => {
 
   const [result, loading] = useFetch('http://127.0.0.1:8000/api');
