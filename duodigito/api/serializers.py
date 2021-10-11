@@ -7,7 +7,7 @@ from .models import EntradaDuodigito
 class EntradaDuoDigitoSerializer(serializers.ModelSerializer):
     class Meta:
         model = EntradaDuodigito
-        fields = ('id','numero', 'multiplo_duodigito', 'criado_em')
+        fields = ('id','numero', 'multiplo_duodigito', 'tempo_duodigito','criado_em')
 
 
 # Essa clase trata a ação que enviar um número para ser calculado por meio do método POST

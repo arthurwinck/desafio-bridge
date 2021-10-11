@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+// UseFetch será nosso hook que lidará com as requests para o backend, tanto GET quanto POST
+
 const useFetch = (url, options) => {
     const [result, setResult] = useState(null)
     const [loading, setLoading] = useState(false)
