@@ -4,14 +4,53 @@ import time
 #o múltiplo duodígito
 
 class EntradaDuodigito(models.Model):
-    numero = models.BigIntegerField(default=0)
     
-    tempo1 = time.perf_counter()
-    # Cálculo do número duodígito
-    multiplo_duodigito= models.BigIntegerField(default=0, editable=False)
-    tempo2 = time.perf_counter()
-    tempo_final = tempo2 - tempo1
-    # Agora para sabermos o tempo necessário para achar o múltiplo, diminuimos um tempo do outro
-    tempo_duodigito = models.IntegerField(default=tempo_final)
+    # Função que retorna um bool dizendo se o número é duodígito ou não
+    def checarDuoDigito(self, numero):
+        string_numero = str(numero)
+        lista_numero = list(string_numero)
+
+        digitos_distintos = []
+        duodigito = True
+
+        for digito in lista_numero:
+            if digito not in digitos_distintos:
+                digitos_distintos.append(digito)
+
+            if len(digitos_distintos) > 2:
+                duodigito = False
+                break
+
+        return duodigito
+
+    # Função para calcular um número duodígito, também obtemos o tempo necessário para realizar o cálculo
+    def calcularDuoDigito(self, numero):
+        
+        tempo1 = time.perf_counter()
+        multiplo = 0
+        i = 1
+        
+        while True:
+            multiplo = numero*i
+            duodigito = self.checarDuoDigito(multiplo)
+
+            if duodigito:
+                break
+
+            i += 1
+
+        tempo2 = time.perf_counter()
+        tempo_total = tempo2 - tempo1
+        # Atualizamos o objeto com o seu duodígito e o tempo levado para o cálculo
+        return [multiplo, tempo_total]
+
+
+    numero = models.BigIntegerField(default=0)
+    multiplo_duodigito = models.BigIntegerField(default=100, editable=False)
+    tempo_duodigito = models.DecimalField(default=0, max_digits=10, decimal_places=3)
     criado_em = models.DateTimeField(auto_now_add=True)
+
+    
+
+    
 

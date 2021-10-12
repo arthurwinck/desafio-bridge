@@ -5,27 +5,30 @@ import useFetch from './hooks/useFetch';
 
 const App = () => {
   const [numero, setNumero] = useState(0)
-  const [stateForm, setStateForm] = useState('');
 
-  // Hook que irá fazer o POST para o backend, pedindo o resultado
-  // Como conseguir o Token CSRF do Django?
-  
-
-  // Hook que busca a lista de todas as entradas usando o GET
-
+  // Hook que busca a lista de todas as entradas usando o GET  
   const [result, loading] = useFetch('http://127.0.0.1:8000/api');
-
-  const useSubmit = () => {
-      axios.post('http://127.0.0.1:8000/api/request/', {
-        numero: numero
-      })
-        .then((response) => {
-          console.log(response)
+  
+  // Hook que irá fazer o POST para o backend, pedindo o resultado
+  const useSubmit = (e) => {
+      e.preventDefault();
+      if (numero >= 100) {
+        axios.post('http://127.0.0.1:8000/api/request/', {
+          numero: numero
         })
-        .catch((response) => {
-          console.log("deu ruim")
-          console.log(response)
-        })
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((response) => {
+            console.log("deu ruim")
+            console.log(response)
+          })
+          window.location.reload()
+      } 
+      else {
+        //Elaborar melhor o aviso
+        console.log("Seu número é menor que 100")
+      }
     }
 
   if (loading) {
@@ -40,7 +43,8 @@ const App = () => {
               {result.map(entrada => (
                 <div key={entrada.id}>
                       <h1>numero={entrada.numero}</h1>
-                      <h1>multiplo={entrada.multiplo_duodigito}</h1>                     
+                      <h1>multiplo={entrada.multiplo_duodigito}</h1>
+                      <h1>tempo={entrada.tempo_duodigito}</h1>                   
                 </div>
               ) 
               )}

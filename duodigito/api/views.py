@@ -26,15 +26,25 @@ class CriarEntradaDuodigitoView(APIView):
         # Se a entrada é valida, podemos receber o número, criar um objeto do tipo entrada e guarda-lo no banco de dados
 
         if serializer.is_valid():
+            
             numero = serializer.data.get('numero')
-            entrada = EntradaDuodigito(numero=numero)
-            entrada.save()
-            status_resposta = status.HTTP_200_OK
+            
+            if numero >= 100:
+                entrada = EntradaDuodigito(numero=numero)
+                [resultado, tempo] = entrada.calcularDuoDigito(numero)
+                entrada.multiplo_duodigito = resultado
+                entrada.tempo_duodigito = (tempo*(10**3))
+                entrada.save()
+                status_resposta = status.HTTP_200_OK
+
+            else:
+                status_resposta = status.HTTP_400_BAD_REQUEST
 
         else:
             status_resposta = status.HTTP_500_INTERNAL_SERVER_ERROR
 
         return Response(EntradaDuoDigitoSerializer(entrada).data,status=status_resposta)
+
 
 # Essa última classe servirá para dar ao frontend o cookie CSRF, que possibilitará ao frontend fazer requisições POST
 @method_decorator(ensure_csrf_cookie, name='dispatch')
