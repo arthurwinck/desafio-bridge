@@ -29,7 +29,7 @@ const CSRFToken = () => {
 
         const fetchData = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/get_cookie');
+                const response = await fetch('http://duodigit-site.herokuapp.com/api/get_cookie');
             }
             catch(e) {
                 throw e;
