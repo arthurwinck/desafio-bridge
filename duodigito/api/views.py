@@ -33,6 +33,7 @@ class CriarEntradaDuodigitoView(APIView):
                 entrada = EntradaDuodigito(numero=numero)
                 [resultado, tempo] = entrada.calcularDuoDigito(numero)
                 entrada.multiplo_duodigito = resultado
+                # Multiplicar o resultado do tempo que é em nanosegundos por 10^3
                 entrada.tempo_duodigito = (tempo*(10**3))
                 entrada.save()
                 status_resposta = status.HTTP_200_OK
