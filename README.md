@@ -9,25 +9,30 @@ Exemplo de entrada: 999
 Exemplo de saída: 9990 (menor número múltiplo de 999 que é um duodígito)
 
 ## Passos para instalação local:
-    1) - Dentro da pasta do projeto, instalar o framework django e a biblioteca django-rest-framework
+    1) - Clonar o repositório para o seu sistema
+
+    $ git clone https://github.com/arthurwinck/desafio-bridge.git
+
+    2) - Dentro da pasta do projeto, instalar o framework django e a biblioteca django-rest-framework
     
+    $ cd desafio-bridge
     $ pip install -r requirements.txt
 
-    2) - Então, no mesmo local, iremos atualizar o banco de dados para usar as tabelas que criamos no projeto, para isso:
+    3) - Então, no mesmo local, iremos atualizar o banco de dados para usar as tabelas que criamos no projeto, para isso:
 
     $ python manage.py makemigrations
     $ python manage.py migrate
 
-    3) - Agora, precisamos acessar a pasta "frontend" do projeto e instalar os módulos usando o yarn ou npm (nesse caso será usado yarn)
+    4) - Agora, precisamos acessar a pasta "frontend" do projeto e instalar os módulos usando o yarn ou npm (nesse caso será usado yarn)
 
     $ cd frontend
     $ yarn install
 
-    3) - Como o projeto foi feito para usar o "index.html" gerado pelo react, iremos criar uma build do nosso projeto
+    5) - Como o projeto foi feito para usar o "index.html" gerado pelo react, iremos criar uma build do nosso projeto
 
     $ yarn build
 
-    4) - Agora, podemos começar a execução do Django, antes voltando para a pasta pai do repositório:
+    6) - Agora, podemos começar a execução do Django, antes voltando para a pasta pai do repositório:
 
     $ cd ..
     $ python manage.py runserver
