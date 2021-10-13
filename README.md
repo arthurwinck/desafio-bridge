@@ -38,3 +38,9 @@ Exemplo de saída: 9990 (menor número múltiplo de 999 que é um duodígito)
     $ python manage.py runserver
     
     
+## Demo de Utilização
+
+
+
+https://user-images.githubusercontent.com/46870164/137045220-b0934284-e4ea-4556-9ddf-601ba112819c.mp4
+
