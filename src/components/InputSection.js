@@ -12,7 +12,7 @@ const InputSection = (props) => {
     const useSubmit = (e) => {
         e.preventDefault();
         if (numero >= 100) {
-          axios.post('http://duodigit-site.herokuapp.com/api/get_cookie/api/request/', {
+          axios.post('https://duodigit-site.herokuapp.com/api/get_cookie/api/request/', {
             numero: numero
           })
             .then((response) => {

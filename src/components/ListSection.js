@@ -4,7 +4,7 @@ import useFetch from '../hooks/useFetch';
 const ListSection = (props) => {
 
     // Hook que busca a lista de todas as entradas usando o GET  
-    const [result, loading] = useFetch('http://duodigit-site.herokuapp.com/api');
+    const [result, loading] = useFetch('https://duodigit-site.herokuapp.com/api');
 
     if (loading) {
         return (
