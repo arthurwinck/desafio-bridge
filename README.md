@@ -8,6 +8,13 @@ Olá! Essa é a minha solução para o Desafio Web Dev Full Stack do Laboratóri
 Exemplo de entrada: 999
 Exemplo de saída: 9990 (menor número múltiplo de 999 que é um duodígito)
 
+## Demo em Servidor
+
+Usei o [Heroku](https://www.heroku.com/) para dar hospedar meu aplicativo:
+
+- [Link para Demo em Servidor](https://duodigit-site.herokuapp.com/)
+
+
 ## Passos para instalação local:
     1) - Clonar o repositório para o seu sistema
 
